@@ -4,6 +4,12 @@ Category Item Library
 - Library for draw a category in a stevedore views
 
 
+Version 
+--------
+
+[![Latest Version](https://api.bintray.com/packages/artearmobile/Android/Category-Item/images/download.svg)](https://bintray.com/artearmobile/Android/Category-Item/_latestVersion)
+
+
 Download
 --------
 via Maven:
@@ -11,14 +17,15 @@ via Maven:
 <dependency>
   <groupId>com.artear.stevedore</groupId>
   <artifactId>categoryitem</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 </dependency>
 ```
 or Gradle:
 ```groovy
-implementation 'com.artear.stevedore:categoryitem:0.0.1'
+implementation 'com.artear.stevedore:categoryitem:0.0.2'
 ```
 Lib requires at minimum Java 7 or Android 4.1.
+
 
 License
 =======

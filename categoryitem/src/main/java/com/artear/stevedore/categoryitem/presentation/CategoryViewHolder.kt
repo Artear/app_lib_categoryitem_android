@@ -24,8 +24,8 @@ import com.artear.stevedore.stevedoreitems.repository.model.box.BoxStyle
 import kotlinx.android.synthetic.main.category_view_holder.view.*
 
 
-class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
-        ArtearViewHolder<CategoryData<BoxStyle>> {
+class CategoryViewHolder(itemView: View, private var listener: CategoryOnClickListener? = null) :
+        RecyclerView.ViewHolder(itemView), ArtearViewHolder<CategoryData<BoxStyle>> {
 
     override fun bind(model: CategoryData<BoxStyle>, artearSection: ArtearSection) {
         itemView.apply {
@@ -35,6 +35,15 @@ class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
             }
             //TODO margin
         }
+
+        itemView.setOnClickListener {
+            listener?.run {
+                model.link.let { link ->
+                    onCategoryClick(link)
+                }
+            }
+        }
+
     }
 
 }

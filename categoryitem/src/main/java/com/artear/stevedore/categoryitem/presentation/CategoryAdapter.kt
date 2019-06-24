@@ -26,7 +26,10 @@ import com.artear.stevedore.stevedoreitems.presentation.model.ArtearItem
 import com.artear.stevedore.stevedoreitems.presentation.model.ArtearSection
 
 
-class CategoryAdapter : ItemAdapter<CategoryData<*>> {
+class CategoryAdapter(private val listener: CategoryOnClickListener) : ItemAdapter<CategoryData<*>> {
+
+    var viewHolder: RecyclerView.ViewHolder? = null
+    var idLayout: Int? = null
 
     override fun isForViewType(item: ArtearItem): Boolean {
         return item.model is CategoryData
@@ -34,8 +37,9 @@ class CategoryAdapter : ItemAdapter<CategoryData<*>> {
 
     override fun onCreateViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
-        val view = inflater.inflate(R.layout.category_view_holder, parent, false)
-        return CategoryViewHolder(view)
+
+        val view = inflater.inflate(idLayout ?: R.layout.category_view_holder, parent, false)
+        return viewHolder ?: CategoryViewHolder(view, listener)
     }
 
     override fun onBindViewHolderBase(holder: ArtearViewHolder<CategoryData<*>>,

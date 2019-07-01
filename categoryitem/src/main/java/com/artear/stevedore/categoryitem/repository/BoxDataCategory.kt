@@ -22,7 +22,7 @@ import com.google.gson.annotations.JsonAdapter
 
 @JsonAdapter(BoxDataCategoryDeserializer::class)
 data class BoxDataCategory(
-        val id: Int,
+        val id: String,
         val title: String,
         val description: String,
         val link: Link,

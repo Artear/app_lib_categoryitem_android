@@ -17,42 +17,25 @@ package com.artear.stevedore.categoryitem.presentation
 
 import com.artear.domain.coroutine.DataShaper
 import com.artear.stevedore.categoryitem.repository.BoxDataCategory
-
 import com.artear.stevedore.stevedoreitems.presentation.model.ArtearItem
-import com.artear.stevedore.stevedoreitems.presentation.model.ArtearSection
+import com.artear.stevedore.stevedoreitems.presentation.model.ArtearItemDecoration
 import com.artear.stevedore.stevedoreitems.repository.model.box.Box
-import com.artear.stevedore.stevedoreitems.repository.model.media.*
-import com.artear.stevedore.stevedoreitems.repository.model.media.MediaType.*
-
-
 
 class CategoryShaper : DataShaper<Box, ArtearItem> {
 
-    override suspend fun transform(input: Box): ArtearItem {
+    override suspend fun transform(input: Box): ArtearItem? {
 
-        val boxDataArticle = (input.data as BoxDataCategory)
-        val imageUrl = getImage(boxDataArticle.media)
+        val boxDataCategory = (input.data as BoxDataCategory)
+        val imageUrl = boxDataCategory.media.getImage()
 
-        return imageUrl.let {
+        return imageUrl?.let {
             val data = CategoryData(imageUrl,
-                    boxDataArticle.title,
-                    boxDataArticle.description,
-                    boxDataArticle.link,
+                    boxDataCategory.title,
+                    boxDataCategory.description,
+                    boxDataCategory.link,
                     input.style
             )
-            ArtearItem(data, ArtearSection())
-        }
-    }
-
-    /**
-     * This function should be in stevedoreitems ?????
-     */
-    private fun getImage(media: Media): String {
-        return when (media.type) {
-            PICTURE -> (media.data as MediaDataPicture).url
-            YOUTUBE -> (media.data as MediaDataYoutube).image.url
-            GALLERY -> (media.data as MediaDataGallery).items[0].url //TODO: REVISAR
-            VIDEO -> (media.data as MediaDataVideo).image.url
+            ArtearItem(data, ArtearItemDecoration())
         }
     }
 

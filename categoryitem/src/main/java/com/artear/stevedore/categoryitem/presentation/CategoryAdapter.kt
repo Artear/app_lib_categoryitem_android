@@ -23,8 +23,7 @@ import com.artear.stevedore.categoryitem.R
 import com.artear.stevedore.stevedoreitems.presentation.contract.ArtearViewHolder
 import com.artear.stevedore.stevedoreitems.presentation.contract.ItemAdapter
 import com.artear.stevedore.stevedoreitems.presentation.model.ArtearItem
-import com.artear.stevedore.stevedoreitems.presentation.model.ArtearSection
-
+import com.artear.stevedore.stevedoreitems.presentation.model.ArtearItemDecoration
 
 class CategoryAdapter(private val listener: CategoryOnClickListener) : ItemAdapter<CategoryData<*>> {
 
@@ -43,7 +42,7 @@ class CategoryAdapter(private val listener: CategoryOnClickListener) : ItemAdapt
     }
 
     override fun onBindViewHolderBase(holder: ArtearViewHolder<CategoryData<*>>,
-                                      model: CategoryData<*>, artearSection: ArtearSection) {
-        holder.bind(model, artearSection)
+                                      model: CategoryData<*>, artearItemDecoration: ArtearItemDecoration) {
+        holder.bind(model, artearItemDecoration)
     }
 }

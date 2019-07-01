@@ -28,7 +28,7 @@ class BoxDataCategoryDeserializer : JsonDeserializer<BoxDataCategory> {
 
     override fun deserialize(json: JsonElement, typeOfT: Type?, context: JsonDeserializationContext): BoxDataCategory {
 
-        val id = json.asJsonObject.get("id").asInt
+        val id = json.asJsonObject.get("id").asString
         val title = json.asJsonObject.get("title").asString
         val description = json.asJsonObject.get("description").asString
         val link = json.getModelObject("link", context, Link::class.java)

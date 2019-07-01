@@ -19,7 +19,7 @@ import android.graphics.Color
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.artear.stevedore.stevedoreitems.presentation.contract.ArtearViewHolder
-import com.artear.stevedore.stevedoreitems.presentation.model.ArtearSection
+import com.artear.stevedore.stevedoreitems.presentation.model.ArtearItemDecoration
 import com.artear.stevedore.stevedoreitems.repository.model.box.BoxStyle
 import kotlinx.android.synthetic.main.category_view_holder.view.*
 
@@ -27,13 +27,15 @@ import kotlinx.android.synthetic.main.category_view_holder.view.*
 class CategoryViewHolder(itemView: View, private var listener: CategoryOnClickListener? = null) :
         RecyclerView.ViewHolder(itemView), ArtearViewHolder<CategoryData<BoxStyle>> {
 
-    override fun bind(model: CategoryData<BoxStyle>, artearSection: ArtearSection) {
+    override fun bind(model: CategoryData<BoxStyle>, artearItemDecoration: ArtearItemDecoration) {
         itemView.apply {
             categoryTitle.text = model.title
-            model.style.background?.let {
-                categoryTitle.setTextColor(Color.parseColor(it.color.light))
+            model.style.background?.color?.let {
+                rootLayout.setBackgroundColor(Color.parseColor(it.light))
             }
-            //TODO margin
+            model.style.title?.color?.let {
+                categoryTitle.setTextColor(Color.parseColor(it.light))
+            }
         }
 
         itemView.setOnClickListener {
